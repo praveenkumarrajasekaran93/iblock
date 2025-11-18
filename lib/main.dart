@@ -137,7 +137,7 @@ class _SimSelectionScreenState extends State<SimSelectionScreen> {
                           child: Text('Use SIM ${idx + 1} (${sim.carrierName ?? 'Unknown'})'),
                         ),
                       );
-                    }).toList(),
+                    }),
                   if (_errorMessage != null) ...[
                     const SizedBox(height: 20),
                     Padding(
