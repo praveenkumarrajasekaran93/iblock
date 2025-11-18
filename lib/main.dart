@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:mobile_number/mobile_number.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'dart:convert';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -48,8 +49,10 @@ class _SimSelectionScreenState extends State<SimSelectionScreen> {
         setState(() {
           _simCards = sims;
         });
+      } on PlatformException catch (e) {
+        _showError('Failed to get SIM data: ${e.message}. This can happen on an emulator or a device without a SIM card.');
       } catch (e) {
-        _showError('Failed to get SIM data: $e');
+        _showError('An unexpected error occurred while reading SIM data: $e');
       }
     } else {
       _showError('Phone permission is required to read SIM information.');
